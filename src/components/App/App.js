@@ -1,7 +1,8 @@
 import './app.css';
 import Main from '../Main/Main';
+import Header from '../Header/Header'
 import { Route, Switch } from 'react-router-dom';
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         // onCardClick={handleCardClick} isLoading={isLoading} cards={cards} onCardLike={handleCardLike} onCardDelete={handleConfirmDeletion}
         />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
