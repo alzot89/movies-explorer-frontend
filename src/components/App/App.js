@@ -1,6 +1,7 @@
 import './app.css';
 import Main from '../Main/Main';
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import { Route, Switch } from 'react-router-dom';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
@@ -17,13 +18,11 @@ function App() {
         </Route >
         <ProtectedRoute
           path="/"
-          // loggedIn={loggedIn}
+          loggedIn={true}
           component={Main}
-        // onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}
-        // onCardClick={handleCardClick} isLoading={isLoading} cards={cards} onCardLike={handleCardLike} onCardDelete={handleConfirmDeletion}
         />
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
