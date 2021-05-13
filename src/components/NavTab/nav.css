@@ -1,0 +1,33 @@
+.nav {
+    height: 66px;
+    display: flex;
+    align-items: center;
+    background-color: #272727;
+}
+
+.nav__list {
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    display: flex;
+}
+
+.nav__element {
+    margin-right: 40px;
+}
+
+.nav__element:last-of-type {
+    margin-right: 0;
+}
+
+.nav__link {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.23;
+    text-decoration-line: underline;
+    color: #FFFFFF;
+}
+
+.nav__link_active {
+    color: #3DDC84;
+}
