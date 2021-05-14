@@ -21,13 +21,32 @@
 }
 
 .nav__link {
+    font-family: Inter;
+    font-style: normal;
     font-weight: 500;
     font-size: 13px;
     line-height: 1.23;
     text-decoration-line: underline;
     color: #FFFFFF;
+    transition: opacity .3s ease;
+}
+
+.nav__link:hover {
+    opacity: .6;
 }
 
 .nav__link_active {
     color: #3DDC84;
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .nav {
+    padding: 18px 14px;
+  }
 }

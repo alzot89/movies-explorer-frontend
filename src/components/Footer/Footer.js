@@ -1,5 +1,4 @@
 import './footer.css';
-import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
@@ -10,13 +9,13 @@ function Footer() {
             <nav className="footer__nav">
                 <ul className="footer__links">
                     <li className="footer__list-element">
-                        <Link to="#" className="footer__link">Яндекс.Практикум</Link>
+                        <a href="https://praktikum.yandex.ru/profile/web/" target="blank" className="footer__link">Яндекс.Практикум</a>
                     </li>
                     <li className="footer__list-element">
-                        <Link to="#" className="footer__link">GitHub</Link>
+                        <a href="https://github.com/alzot89" target="blank" className="footer__link">GitHub</a>
                     </li>
                     <li className="footer__list-element">
-                        <Link to="#" className="footer__link">Facebook</Link>
+                        <a href="https://www.facebook.com/profile.php?id=100011348736376" target="blank" className="footer__link">Facebook</a>
                     </li>
                 </ul>
             </nav>
