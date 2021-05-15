@@ -67,7 +67,7 @@
 
 .about-me__description {
     margin: 26px 0 0;
-    width: 600px;
+    max-width: 600px;
     font-family: Inter;
     font-style: normal;
     font-weight: 400;
@@ -111,12 +111,13 @@
 
 @media screen and (max-width: 768px) {
   .about-me {
-    padding: 18px 30px;
+    column-gap: 49px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .about-me {
-    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
   }
 }
