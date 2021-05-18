@@ -1,5 +1,4 @@
 .portfolio {
-    height: 475px;
     background-color: #202020;
     padding: 50px 70px 125px;
     box-sizing: border-box;
@@ -54,5 +53,36 @@
     height: 1px;
     background-color: #424242;
     grid-column: 1/3;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 45px 50px 90px;
+  }
+
+  .portfolio__subtitle {
+      font-size: 28px;
+      line-height: 1.79;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio {
+    padding: 34.5px 14px 70px;
+  }
+
+  .portfolio__title {
+      font-size: 14px;
+      line-height: 1.43;
+  }
+
+  .portfolio__container {
+    column-gap: 24px;
+  }
+
+    .portfolio__subtitle {
+      font-size: 18px;
+      line-height: 1.56;
+  }
 }
 
