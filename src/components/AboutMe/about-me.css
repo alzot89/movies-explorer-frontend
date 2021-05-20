@@ -1,7 +1,6 @@
 .about-me {
     padding: 110px 70px 50px;
     box-sizing: border-box;
-    background-color: #202020;
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(6, min-content);

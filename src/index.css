@@ -1,6 +1,7 @@
 @import url('./vendor/fonts/fonts.css');
 
 body {
+  background-color: #202020;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;

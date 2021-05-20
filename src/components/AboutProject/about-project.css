@@ -2,7 +2,6 @@
     height: 608px;
     padding: 110px 70px;
     box-sizing: border-box;
-    background-color: #202020;
     display: flex;
     flex-direction: column;
 }
