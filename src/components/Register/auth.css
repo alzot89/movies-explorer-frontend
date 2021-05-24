@@ -42,6 +42,8 @@
     outline-color: #2507cf;
     margin: 5px 0 0;
     padding: 0 0 10px;
+    font-family: Inter;
+    font-style: normal;
     font-size: 14px;
     line-height: 1.21;
     font-weight: 400;
@@ -191,6 +193,16 @@
     }
 
     .auth__link {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+
+    .form_profile {
+        margin-top: 66px;
+        min-height: 456px;
+    }
+
+    .form__button_profile {
         font-size: 12px;
         line-height: 1.25;
     }

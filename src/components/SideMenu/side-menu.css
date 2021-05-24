@@ -1,0 +1,57 @@
+
+@keyframes move {
+    from {
+      right: -100%;
+    }
+
+    to {
+      right: 0;
+    }
+}
+
+.side-menu__container {
+    position: absolute;
+    display: none;
+    top: 0;
+    right: -100%;
+    width: 70vw;
+    height: 1024px;
+    background-color: #202020;
+    animation: move .3s linear forwards;
+    z-index: 1;
+    padding: 159px 0 90px;
+    box-sizing: border-box;
+}
+
+.side-menu__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .3s, opacity .3s;
+}
+
+@media screen and (max-width: 768px) {
+  .side-menu__overlay_active {
+    visibility: visible;
+    opacity: .3;
+    transition: visibility 0.3s, opacity .3s;
+  }
+
+  .side-menu__container_active {
+    right: 0;
+    flex-direction: column;
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .side-menu__container_active {
+    width: 100vw;
+    padding: 144px 0 46px;
+  }
+}

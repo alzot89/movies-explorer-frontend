@@ -41,10 +41,11 @@
 
 @media screen and (max-width: 320px) {
   .profile {
-    padding: 18px 14px;
+    padding: 70px 30px 40px;
   }
 
-  .profile__link {
-    margin: 0 14px 0 0;
+  .profile__out {
+    font-size: 12px;
+    line-height: 1.25;
   }
 }

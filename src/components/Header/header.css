@@ -27,10 +27,9 @@
 
 }
 
-.header__nav {
+.header__auth {
     margin-left: auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 100%;
 }
@@ -84,6 +83,12 @@
 
 .header__burger {
   display: none;
+}
+
+.header__list {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
 }
 
 @media screen and (max-width: 768px) {

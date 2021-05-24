@@ -1,9 +1,19 @@
 import './header.css';
 import logo from '../../images/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Route } from 'react-router-dom';
+import Navigation from '../Navigation/Navigation';
+import { useMediaQuery } from '../../utils/MediaQuery';
 
 function Header({ isActive, onOpenBurger }) {
+
+    const history = useHistory();
+
+    function handleLoginButton() {
+        history.push('/signin')
+    }
+
+    const [width] = useMediaQuery();
 
     return (
         <header className="header">
@@ -11,13 +21,13 @@ function Header({ isActive, onOpenBurger }) {
                 <img className="logo" src={logo} alt="картинка: лого"></img>
             </Link>
             <Route exact path="/">
-                <div className="header__nav">
+                <div className="header__auth">
                     <Link className="header__link" to="/signup">Регистрация</Link>
-                    <button className="header__button">Войти</button>
+                    <button className="header__button" onClick={handleLoginButton} >Войти</button>
                 </div>
             </Route>
             <Route path="/profile">
-                <button className="header__button header__button_profile">Аккаунт</button>
+                {(width > 768) && <Navigation />}
                 <div className={`header__burger ${isActive && 'header__burger_active'}`} onClick={onOpenBurger}>
                     <span></span>
                 </div>

@@ -3,7 +3,7 @@ import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
-import Navigation from '../Navigation/Navigation';
+import SideMenu from '../SideMenu/SideMenu';
 import { Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -31,7 +31,7 @@ function App() {
           <Login />
         </Route >
       </Switch>
-      <Navigation isActive={isActive} />
+      <SideMenu isActive={isActive} />
     </div>
   );
 }
