@@ -6,11 +6,11 @@ function Login() {
     return (
         <section className="auth">
             <div className="auth__container">
-                <Link to="/#about">
+                <Link to="/">
                     <img className="logo" src={logo} alt="картинка: лого"></img>
                 </Link>
                 <h2 className="auth__title">Рады видеть!</h2>
-                <form className="form" name="register">
+                <form className="form" name="login">
                     <div className="form__container">
                         <label className="form__label" htmlFor="email-input">E-mail</label>
                         <input id="email-input" className="form__input" type="email" name="email" required />

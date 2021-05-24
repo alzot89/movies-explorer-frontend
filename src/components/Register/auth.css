@@ -1,5 +1,4 @@
 .auth {
-    background-color: #202020;
     padding: 70px 0;
 }
 
@@ -10,6 +9,7 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
 
 .auth__title{
     margin: 40px 0 0;
@@ -29,6 +29,11 @@
     flex-direction: column;
 }
 
+.form_profile {
+    min-height: 298px;
+    margin-top: 99px;
+}
+
 .form__input {
     width: 100%;
     background-color: #202020;
@@ -41,6 +46,19 @@
     line-height: 1.21;
     font-weight: 400;
     color: #FFFFFF;
+}
+
+.form__input_profile {
+    margin: 0;
+    padding: 0 0 16px;
+    text-align: end;
+    direction: ltr;
+    font-size: 11px;
+    line-height: 1.18;
+}
+
+.form__input_profile[name="email"] {
+    border-bottom: 0;
 }
 
 .form__button {
@@ -60,8 +78,16 @@
     transition: opacity .4s ease;
 }
 
-.auth__button:hover {
+.form__button:hover {
     opacity: .6;
+}
+
+.form__button_profile {
+    background-color: #202020;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.23;
+    font-weight: 400;
 }
 
 .auth__enter {
@@ -97,6 +123,10 @@
     flex-direction: column;
 }
 
+.form__container_profile {
+    position: relative;
+}
+
 .form__label {
     font-family: Inter;
     font-style: normal;
@@ -105,6 +135,14 @@
     line-height: 1.2;
     color: #8B8B8B;
     align-self: flex-start;
+}
+
+.form__label_profile {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1.18;
+    color: #FFFFFF;
+    position: absolute;
 }
 
 .form__error {
@@ -120,6 +158,10 @@
 @media screen and (max-width: 768px) {
     .auth {
         padding: 232px 0;
+    }
+
+    .form_profile {
+        margin-top: 72px;
     }
 }
 

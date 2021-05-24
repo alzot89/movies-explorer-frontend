@@ -1,19 +1,28 @@
 import './app.css';
 import Main from '../Main/Main';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
+import Navigation from '../Navigation/Navigation';
 import { Route, Switch } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
+
+  const [isActive, setIsActive] = useState(false);
+
+  function hadleOpenBurger() {
+    setIsActive(!isActive);
+  }
+
   return (
     <div className="app">
       <Switch>
         <Route exact path="/">
-          <Header />
           <Main />
-          <Footer />
+        </Route>
+        <Route path="/profile">
+          <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} />
         </Route>
         <Route path="/signup">
           <Register />
@@ -22,6 +31,7 @@ function App() {
           <Login />
         </Route >
       </Switch>
+      <Navigation isActive={isActive} />
     </div>
   );
 }
