@@ -1,4 +1,5 @@
 import './search-form.css';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
     return (
@@ -9,6 +10,7 @@ function SearchForm() {
                     <span id="search__error" className="search__error"></span>
                 </div>
                 <button className="search__button">Найти</button>
+                <FilterCheckbox />
             </form>
             <div className="search__line"></div>
         </section>
