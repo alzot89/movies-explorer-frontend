@@ -1,8 +1,8 @@
 .navigation {
   display: flex;
   align-items: center;
-  width: 60%;
-  justify-content: space-between;
+  justify-content: center;
+  transform: translate(31px, 0);
 }
 
 .navigation__list {
@@ -15,6 +15,10 @@
 
 .navigation__element {
   margin: 0 16px 0 0;
+}
+
+.navigation__element:first-of-type {
+  display: none;
 }
 
 .navigation__link {
@@ -34,7 +38,7 @@
     opacity: .6;
 }
 
-.navigation__button {
+.account-button {
     padding: 0;
     margin: 0;
     width: 100px;
@@ -52,8 +56,12 @@
     transition: opacity 0.4s ease;
 }
 
-.navigation__button:hover {
+.account-button:hover {
   opacity: .6;
+}
+
+.account-button_navigation {
+  display: none;
 }
 
 @media screen and (max-width: 768px) {
@@ -62,11 +70,16 @@
     flex-direction: column;
     justify-content: space-between;
     margin: 0 auto;
+    transform: translate(0, 0);
   }
 
   .navigation__list {
     flex-direction: column;
     margin: 0 auto;
+  }
+
+  .navigation__element:first-of-type {
+    display: block;
   }
 
   .navigation__link {
@@ -77,5 +90,9 @@
 
   .navigation__element {
     margin: 0 0 28px 0;
+  }
+
+  .account-button_navigation {
+    display: block;
   }
 }

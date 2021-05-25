@@ -3,7 +3,7 @@ import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
-import SideMenu from '../SideMenu/SideMenu';
+import Movies from '../Movies/Movies';
 import { Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -24,6 +24,9 @@ function App() {
         <Route path="/profile">
           <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} />
         </Route>
+        <Route path="/movies">
+          <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} />
+        </Route>
         <Route path="/signup">
           <Register />
         </Route >
@@ -31,7 +34,6 @@ function App() {
           <Login />
         </Route >
       </Switch>
-      <SideMenu isActive={isActive} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import './profile.css';
 import Header from '../Header/Header'
 import { Link } from 'react-router-dom';
+import SideMenu from '../SideMenu/SideMenu';
 
 function Profile({ onOpenBurger, isActive }) {
     return (
@@ -22,6 +23,7 @@ function Profile({ onOpenBurger, isActive }) {
                     <button className="form__button form__button_profile">Редактировать</button>
                 </form>
                 <Link to="/" className="profile__out">Выйти из аккаунта</Link>
+                <SideMenu isActive={isActive} />
             </section>
         </>
     );

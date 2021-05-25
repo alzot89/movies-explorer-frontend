@@ -13,6 +13,10 @@ function Header({ isActive, onOpenBurger }) {
         history.push('/signin')
     }
 
+    function handleAccountButton() {
+        history.push('/profile')
+    }
+
     const [width] = useMediaQuery();
 
     return (
@@ -27,7 +31,23 @@ function Header({ isActive, onOpenBurger }) {
                 </div>
             </Route>
             <Route path="/profile">
-                {(width > 768) && <Navigation />}
+                {(width > 768) &&
+                    <>
+                        <Navigation onAccountButton={handleAccountButton} />
+                        <button className="account-button" onClick={handleAccountButton}>Аккаунт</button>
+                    </>
+                }
+                <div className={`header__burger ${isActive && 'header__burger_active'}`} onClick={onOpenBurger}>
+                    <span></span>
+                </div>
+            </Route>
+            <Route path="/movies">
+                {(width > 768) &&
+                    <>
+                        <Navigation onAccountButton={handleAccountButton} />
+                        <button className="account-button" onClick={handleAccountButton}>Аккаунт</button>
+                    </>
+                }
                 <div className={`header__burger ${isActive && 'header__burger_active'}`} onClick={onOpenBurger}>
                     <span></span>
                 </div>

@@ -48,6 +48,7 @@
     line-height: 1.21;
     font-weight: 400;
     color: #FFFFFF;
+    box-sizing: border-box;
 }
 
 .form__input_profile {
