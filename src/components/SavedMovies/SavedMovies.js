@@ -5,14 +5,15 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function SavedMovies({ isActive, onOpenBurger }) {
+function SavedMovies({ isActive, onOpenBurger, movies, isLoading }) {
     return (
         <>
             <Header isActive={isActive} onOpenBurger={onOpenBurger} />
             <SearchForm />
             <section className="movies">
-                <MoviesCardList />
-                <Preloader />
+                {isLoading
+                    ? <Preloader />
+                    : <MoviesCardList movies={movies} />}
             </section>
             <Footer />
         </>
