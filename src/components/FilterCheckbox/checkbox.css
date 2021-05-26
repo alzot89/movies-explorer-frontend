@@ -4,6 +4,10 @@
     position: relative;
     cursor: pointer;
     transition: all .3s ease 0s;
+    -webkit-transition: all .3s ease 0s;
+    -moz-transition: all .3s ease 0s;
+    -ms-transition: all .3s ease 0s;
+    -o-transition: all .3s ease 0s;
     box-sizing: border-box;
 }
 
