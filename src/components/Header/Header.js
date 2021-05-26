@@ -33,7 +33,7 @@ function Header({ isActive, onOpenBurger }) {
             <Route path="/profile">
                 {(width > 768) &&
                     <>
-                        <Navigation onAccountButton={handleAccountButton} />
+                        <Navigation />
                         <button className="account-button" onClick={handleAccountButton}>Аккаунт</button>
                     </>
                 }
@@ -44,7 +44,18 @@ function Header({ isActive, onOpenBurger }) {
             <Route path="/movies">
                 {(width > 768) &&
                     <>
-                        <Navigation onAccountButton={handleAccountButton} />
+                        <Navigation />
+                        <button className="account-button" onClick={handleAccountButton}>Аккаунт</button>
+                    </>
+                }
+                <div className={`header__burger ${isActive && 'header__burger_active'}`} onClick={onOpenBurger}>
+                    <span></span>
+                </div>
+            </Route>
+            <Route path="/saved-movies">
+                {(width > 768) &&
+                    <>
+                        <Navigation />
                         <button className="account-button" onClick={handleAccountButton}>Аккаунт</button>
                     </>
                 }

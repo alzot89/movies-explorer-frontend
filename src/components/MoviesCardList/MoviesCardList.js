@@ -1,11 +1,14 @@
 import './movies-card-list.css';
+import { Route } from 'react-router-dom';
 
 function MoviesCardList() {
     return (
         <>
             <ul className="movies__list">
             </ul>
-            <button className="movies__button">Еще</button>
+            <Route path="/movies">
+                <button className="movies__button">Еще</button>
+            </Route>
         </>
     );
 }

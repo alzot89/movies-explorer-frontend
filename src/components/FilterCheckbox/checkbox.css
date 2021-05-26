@@ -40,11 +40,11 @@
     background-color: #3DDC84;
     position: absolute;
     top: 2px;
-    left: 18px;
+    left: 2px;
 }
 
 .checkbox_active::after {
-    left: 2px;
+    left: 18px;
 }
 
 @media screen and (max-width: 320px) {

@@ -1,7 +1,13 @@
 import './navigation.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
-function Navigation({ onAccountButton }) {
+function Navigation() {
+
+    const history = useHistory();
+
+    function handleAccountButton() {
+        history.push('/profile')
+    }
 
     return (
         <nav className="navigation">
@@ -16,7 +22,7 @@ function Navigation({ onAccountButton }) {
                     <NavLink to='/saved-movies' className="navigation__link" activeClassName="navigation__link_active">Сохраненные фильмы</NavLink>
                 </li>
             </ul>
-            <button className="account-button account-button_navigation" onClick={onAccountButton}>Аккаунт</button>
+            <button className="account-button account-button_navigation" onClick={handleAccountButton}>Аккаунт</button>
         </nav>
     );
 }

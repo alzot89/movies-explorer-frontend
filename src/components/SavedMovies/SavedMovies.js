@@ -1,10 +1,10 @@
-import './movies.css';
+import './saved-movies.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 
-function Movies({ isActive, onOpenBurger }) {
+function SavedMovies({ isActive, onOpenBurger }) {
     return (
         <>
             <Header isActive={isActive} onOpenBurger={onOpenBurger} />
@@ -17,4 +17,4 @@ function Movies({ isActive, onOpenBurger }) {
     );
 }
 
-export default Movies;
+export default SavedMovies;
