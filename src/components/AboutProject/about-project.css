@@ -19,7 +19,7 @@
 }
 
 .about-project__line {
-    max-width: 100%;
+    width: 100%;
     margin-top: 23px;
     height: 1px;
     background-color: #DADADA;
@@ -135,10 +135,9 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 580px) {
   .about-project {
     height: 641px;
-    padding: 70px 18px;
   }
 
   .about-project__line {
@@ -195,5 +194,11 @@
   .about-project__frontend {
     font-size: 11px;
     line-height: 1.18;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .about-project {
+    padding: 70px 18px;
   }
 }

@@ -22,7 +22,7 @@
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(5, min-content);
-    column-gap: 231px;
+    column-gap: 5px;
 }
 
 .portfolio__subtitle {
@@ -36,6 +36,7 @@
     line-height: 1.67;
     letter-spacing: -0.04em;
     color: #FFFFFF;
+    text-align: start;
 }
 
 .portfolio__link {
@@ -66,23 +67,22 @@
   }
 }
 
-@media screen and (max-width: 320px) {
-  .portfolio {
-    padding: 34.5px 14px 70px;
-  }
+@media screen and (max-width: 700px) {
 
   .portfolio__title {
       font-size: 14px;
       line-height: 1.43;
   }
 
-  .portfolio__container {
-    column-gap: 24px;
-  }
-
     .portfolio__subtitle {
       font-size: 18px;
       line-height: 1.56;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio {
+    padding: 34.5px 14px 70px;
   }
 }
 

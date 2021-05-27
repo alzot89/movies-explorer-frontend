@@ -106,7 +106,17 @@
 }
 }
 
+
+
 @media screen and (max-width: 320px) {
+     .techs__seven {
+        font-size: 30px;
+        line-height: 1.2;
+}
+
+}
+
+@media screen and (max-width: 380px) {
   .techs {
     padding: 70px 18px;
   }
@@ -119,12 +129,6 @@
   .techs__line {
       margin-top: 28px;
   }
-
-    .techs__seven {
-        font-size: 30px;
-        line-height: 1.2;
-    margin: 60px auto 0;
-}
 
 .techs__subtitle {
     max-width: 292px;
