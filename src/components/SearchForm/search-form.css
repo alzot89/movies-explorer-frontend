@@ -27,6 +27,9 @@
     font-size: 14px;
     line-height: 1.29;
     color: #FFFFFF;
+}
+
+.search__input:focus {
     outline-color: #4285F4;
 }
 
