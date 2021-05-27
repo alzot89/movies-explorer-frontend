@@ -48,6 +48,15 @@
     justify-self: flex-end;
 }
 
+.movie__button_delete {
+    border: 0;
+    background-color: #222222;
+    border-radius: 0;
+    background-image: url('../../images/d8.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .movie__button:hover {
     opacity: .6;
 }
