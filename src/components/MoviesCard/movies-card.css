@@ -23,8 +23,6 @@
 .movie__title {
     width: 90%;
     margin: 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 500;
     font-size: 13px;
     line-height: 1.23;
@@ -67,8 +65,6 @@
 
 .movie__duration {
     margin: 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 11px;
     line-height: 1.18;

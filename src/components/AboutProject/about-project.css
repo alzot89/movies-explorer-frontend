@@ -9,8 +9,6 @@
 
 .about-project__title {
     margin: 0 auto 0 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 22px;
     line-height: 1.22;
@@ -35,8 +33,6 @@
 .about-project__subtitle {
     margin: 0;
     max-width: 550px;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 1.09;
@@ -49,8 +45,6 @@
 .about-project__paragraph {
     margin: 26px 0 0;
     max-width: 550px;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.4;
@@ -70,8 +64,6 @@
 .about-project__one-week {
     margin: 0;
     width: 20%;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.2;
@@ -81,8 +73,6 @@
 .about-project__four-weeks {
     margin: 0;
     width: 80%;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.2;
@@ -98,8 +88,6 @@
 .about-project__backend {
     margin: 0;
     width: 20%;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.2;
@@ -109,8 +97,6 @@
 .about-project__frontend {
     margin: 0;
     width: 80%;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.2;

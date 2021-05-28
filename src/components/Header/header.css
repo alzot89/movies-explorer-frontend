@@ -36,8 +36,6 @@
 
 .header__link {
     margin: 0 30px 0 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33px;
@@ -58,8 +56,6 @@
     background-color: #3DDC84;
     border-radius: 3px;
     border: 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33px;

@@ -11,8 +11,6 @@
 
 .footer__note {
     margin: 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 1.23;
@@ -32,8 +30,6 @@
 .footer__copyright {
     justify-self: start;
     margin: 20px 0 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 1.23;
@@ -62,8 +58,6 @@
 
 .footer__link {
     margin: 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 13px;
     line-height: 1.23;

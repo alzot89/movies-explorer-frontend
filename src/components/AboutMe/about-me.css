@@ -10,8 +10,6 @@
 
 .about-me__title {
     margin: 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 22px;
     line-height: 1.22;
@@ -41,8 +39,6 @@
 
 .about-me__name{
     margin: 66px 0 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 50px;
     line-height: 1.16;
@@ -54,8 +50,6 @@
 
 .about-me__subtitle{
     margin: 18px 0 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 1.11;
@@ -67,8 +61,6 @@
 .about-me__description {
     margin: 26px 0 0;
     max-width: 600px;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.57;
@@ -94,8 +86,6 @@
 
 .about-me__link {
     margin: 0;
-    font-family: Inter;
-    font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.21;
