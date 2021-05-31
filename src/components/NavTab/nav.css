@@ -1,0 +1,45 @@
+.nav {
+    height: 66px;
+    display: flex;
+    align-items: center;
+    background-color: #272727;
+}
+
+.nav__list {
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    display: flex;
+}
+
+.nav__element {
+    margin-right: 40px;
+}
+
+.nav__element:last-of-type {
+    margin-right: 0;
+}
+
+.nav__link {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.23;
+    text-decoration-line: underline;
+    color: #FFFFFF;
+    transition: opacity .3s ease;
+}
+
+.nav__link:hover {
+    opacity: .6;
+}
+
+.nav__link_active {
+    color: #3DDC84;
+}
+
+@media screen and (max-width: 320px) {
+  .nav__link {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}

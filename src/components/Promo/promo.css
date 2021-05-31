@@ -1,0 +1,52 @@
+.promo {
+    padding: 184px 275px 224px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.promo__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  height: 320px;
+  background-image: url('../../images/praktikum_logo.svg');
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: translate(-50%, -50%);
+}
+
+.promo__title {
+    max-width: 730px;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+    margin: 0 auto;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    padding: 326px 19px 342px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .promo {
+    padding: 207px 10px 246px;
+  }
+
+  .promo__logo {
+    width: 248px;
+    height: 248px;
+  }
+
+  .promo__title {
+    font-size: 31px;
+    line-height: 1.26;
+  }
+}
