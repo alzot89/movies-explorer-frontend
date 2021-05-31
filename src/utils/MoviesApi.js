@@ -1,4 +1,4 @@
-class Api {
+class MoviesApi {
     constructor({ address }) {
         this._address = address;
     }
@@ -22,6 +22,6 @@ const config = {
     address: 'https://api.nomoreparties.co/beatfilm-movies',
 }
 
-const api = new Api(config);
+const moviesApi = new MoviesApi(config);
 
-export default api
+export default moviesApi

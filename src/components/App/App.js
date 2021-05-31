@@ -7,7 +7,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import SideMenu from '../SideMenu/SideMenu';
 import NotFound from '../NotFound/NotFound';
-import api from '../../utils/api';
+import moviesApi from '../../utils/MoviesApi';
 import { Route, Switch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     setIsLoading(true);
-    api.getMovies()
+    moviesApi.getMovies()
       .then((data) => {
         setMovies(data)
       })
