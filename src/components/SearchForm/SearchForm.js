@@ -1,12 +1,12 @@
 import './search-form.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm() {
+function SearchForm({ handleChange, onSubmit }) {
     return (
         <section className="search">
-            <form className="search__form">
+            <form className="search__form" name="search" onSubmit={onSubmit}>
                 <div className="search__container">
-                    <input className="search__input" name="movies" type="text" id="search" placeholder="Фильм" required></input>
+                    <input className="search__input" name="movies" type="text" id="search" placeholder="Фильм" required onChange={handleChange}></input>
                     <span id="search__error" className="search__error"></span>
                 </div>
                 <button className="search__button">Найти</button>

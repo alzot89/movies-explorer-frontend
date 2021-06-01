@@ -9,27 +9,38 @@ import SideMenu from '../SideMenu/SideMenu';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi';
 import { Route, Switch } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function App() {
-
+  const [searchQuery, setSearchQuery] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
-    moviesApi.getMovies()
-      .then((data) => {
-        setMovies(data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
-  }, []);
+  function handleRequest() {
+    if (searchQuery !== '') {
+      setIsLoading(true);
+      moviesApi.getMovies()
+        .then((data) => {
+          setMovies(data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    }
+  }
+
+  function handleSearchFormSubmit(e) {
+    e.preventDefault();
+    handleRequest();
+  }
+
+  function handleInputChange(e) {
+    setSearchQuery(e.target.value)
+  }
 
   function hadleOpenBurger() {
     setIsActive(!isActive);
@@ -46,7 +57,7 @@ function App() {
           <SideMenu isActive={isActive} />
         </Route>
         <Route path="/movies">
-          <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} />
+          <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} handleChange={handleInputChange} handleSubmit={handleSearchFormSubmit} />
           <SideMenu isActive={isActive} />
         </Route>
         <Route path="/saved-movies">
