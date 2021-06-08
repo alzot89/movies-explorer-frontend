@@ -8,6 +8,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import SideMenu from '../SideMenu/SideMenu';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi';
+import { filterByKeyWord } from '../../utils/FilterMovies';
 import { Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -17,25 +18,30 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleRequest() {
-    if (searchQuery !== '') {
-      setIsLoading(true);
-      moviesApi.getMovies()
-        .then((data) => {
-          setMovies(data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
+
+  async function handleRequest() {
+    setIsLoading(true);
+    try {
+      const res = await moviesApi.getMovies();
+      setIsLoading(false);
+      return res
+    } catch (err) {
+      console.log(err)
+      setIsLoading(false)
     }
   }
 
   function handleSearchFormSubmit(e) {
+    const form = e.target;
     e.preventDefault();
-    handleRequest();
+    handleRequest()
+      .then((res) => {
+        const filteredMovies = filterByKeyWord(res, searchQuery)
+        if (searchQuery !== '') {
+          setMovies(filteredMovies)
+        }
+      })
+    form.reset();
   }
 
   function handleInputChange(e) {
