@@ -8,7 +8,7 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import SideMenu from '../SideMenu/SideMenu';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi';
-import { filterByKeyWord } from '../../utils/FilterMovies';
+import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
 import { Route, Switch } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -16,7 +16,9 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isActive, setIsActive] = useState(false);
   const [movies, setMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
 
   async function handleRequest() {
@@ -39,9 +41,21 @@ function App() {
         const filteredMovies = filterByKeyWord(res, searchQuery)
         if (searchQuery !== '') {
           setMovies(filteredMovies)
+          setFilteredMovies(filteredMovies)
         }
       })
     form.reset();
+  }
+
+  function handleCheckbox(e) {
+    setToggle(!toggle);
+    const checked = e.target.checked
+    if (!checked) {
+      setMovies(filteredMovies)
+    } else {
+      const shortMovies = filterByDuration(filteredMovies);
+      setMovies(shortMovies)
+    }
   }
 
   function handleInputChange(e) {
@@ -63,7 +77,7 @@ function App() {
           <SideMenu isActive={isActive} />
         </Route>
         <Route path="/movies">
-          <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} handleChange={handleInputChange} handleSubmit={handleSearchFormSubmit} />
+          <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} handleChange={handleInputChange} handleSubmit={handleSearchFormSubmit} toggle={toggle} handleCheckbox={handleCheckbox} />
           <SideMenu isActive={isActive} />
         </Route>
         <Route path="/saved-movies">

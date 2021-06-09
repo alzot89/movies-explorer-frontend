@@ -1,7 +1,7 @@
 import './search-form.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ handleChange, onSubmit }) {
+function SearchForm({ handleChange, onSubmit, toggle, handleCheckbox }) {
     return (
         <section className="search">
             <form className="search__form" name="search" onSubmit={onSubmit}>
@@ -10,7 +10,7 @@ function SearchForm({ handleChange, onSubmit }) {
                     <span id="search__error" className="search__error"></span>
                 </div>
                 <button className="search__button">Найти</button>
-                <FilterCheckbox />
+                <FilterCheckbox toggle={toggle} handleCheckbox={handleCheckbox} />
             </form>
             <div className="search__line"></div>
         </section>
