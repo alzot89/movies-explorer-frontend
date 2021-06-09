@@ -3,7 +3,7 @@ import logo from '../../images/logo.png';
 import { Link, useHistory } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
-import { useMediaQuery } from '../../utils/MediaQuery';
+import useWindowDimensions from '../../utils/MediaQuery';
 
 function Header({ isActive, onOpenBurger }) {
 
@@ -17,7 +17,7 @@ function Header({ isActive, onOpenBurger }) {
         history.push('/profile')
     }
 
-    const [width] = useMediaQuery();
+    const { width } = useWindowDimensions();
 
     return (
         <header className="header">

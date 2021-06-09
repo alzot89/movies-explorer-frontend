@@ -20,7 +20,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
 
-
   async function handleRequest() {
     setIsLoading(true);
     try {

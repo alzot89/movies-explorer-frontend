@@ -1,16 +1,24 @@
-import { useLayoutEffect, useState } from "react";
+import { useState, useEffect } from 'react';
 
-export const useMediaQuery = () => {
-    const [screenSize, setScreenSize] = useState([0, 0]);
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
 
-    useLayoutEffect(() => {
-        function updateScreenSize() {
-            setScreenSize([window.innerWidth, window.innerHeight]);
+export default function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
         }
-        window.addEventListener("resize", updateScreenSize);
-        updateScreenSize();
-        return () => window.removeEventListener("resize", updateScreenSize);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    return screenSize;
+    return windowDimensions;
 }

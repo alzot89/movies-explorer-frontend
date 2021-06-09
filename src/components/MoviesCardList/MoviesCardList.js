@@ -3,15 +3,13 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { Route } from 'react-router-dom';
 import { useState } from 'react';
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({ movies, index }) {
 
-    const [moviesAmount, setMoviesAmount] = useState(5)
-
+    const [moviesAmount, setMoviesAmount] = useState(index)
 
     function handleClick() {
-        setMoviesAmount(moviesAmount + 5)
+        setMoviesAmount(moviesAmount + index)
     }
-
 
     return (
         <>
