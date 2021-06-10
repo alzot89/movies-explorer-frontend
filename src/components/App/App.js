@@ -32,7 +32,7 @@ function App() {
         }
       })
       .catch((err) => {
-        setErrorMessage(err)
+        err.then((preview) => { setErrorMessage(preview.message) })
       })
   }
 
@@ -46,7 +46,7 @@ function App() {
       })
       .then(() => { history.push('/movies') })
       .catch((err) => {
-        setErrorMessage(err)
+        err.then((preview) => { setErrorMessage(preview.message) })
       });
   }
 

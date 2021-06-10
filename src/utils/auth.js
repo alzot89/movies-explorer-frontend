@@ -12,7 +12,7 @@ export const register = (credential) => {
             if (res.status === 200) {
                 return res.json()
             } else {
-                throw new Error(`Ошибка: ${res.status} ${res.statusText} `)
+                throw res.json()
             }
         })
         .then((res) => {
