@@ -13,7 +13,7 @@ class MainApi {
     }
 
     saveMovie(movie) {
-        return fetch(`${this._address}/cards`, {
+        return fetch(`${this._address}/movies`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

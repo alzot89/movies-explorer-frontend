@@ -8,9 +8,10 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import SideMenu from '../SideMenu/SideMenu';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi';
+import * as auth from '../../utils/auth'
 import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
-import { Route, Switch } from 'react-router-dom';
-import { useState } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -19,6 +20,51 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const history = useHistory();
+
+  function handleRegister(credential) {
+    auth.register(credential)
+      .then((res) => {
+        if (res) {
+          history.push('/signin')
+        }
+      })
+      .catch((err) => {
+        setErrorMessage(err)
+      })
+  }
+
+  function handleLogin(credential) {
+    if (!credential.email || !credential.password) {
+      return
+    }
+    auth.authorize(credential)
+      .then(() => {
+        setLoggedIn(true);
+      })
+      .then(() => { history.push('/movies') })
+      .catch((err) => {
+        setErrorMessage(err)
+      });
+  }
+
+  function handleLogout() {
+    auth.signout();
+    setLoggedIn(false);
+  }
+
+  useEffect(() => {
+    auth.checkToken()
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+        }
+      })
+      .then(() => { history.push('/movies') })
+      .catch((err) => { console.log(err) })
+  }, [history])
 
   async function handleRequest() {
     setIsLoading(true);
@@ -72,7 +118,7 @@ function App() {
           <Main />
         </Route>
         <Route path="/profile">
-          <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} />
+          <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} handleLogout={handleLogout} />
           <SideMenu isActive={isActive} />
         </Route>
         <Route path="/movies">
@@ -84,10 +130,10 @@ function App() {
           <SideMenu isActive={isActive} />
         </Route>
         <Route path="/signup">
-          <Register />
+          <Register onRegister={handleRegister} errorMessage={errorMessage} />
         </Route >
         <Route path="/signin">
-          <Login />
+          <Login onLogin={handleLogin} errorMessage={errorMessage} />
         </Route >
         <Route path="*">
           <NotFound />

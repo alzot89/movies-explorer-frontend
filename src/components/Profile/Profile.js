@@ -2,7 +2,7 @@ import './profile.css';
 import Header from '../Header/Header'
 import { Link } from 'react-router-dom';
 
-function Profile({ onOpenBurger, isActive }) {
+function Profile({ onOpenBurger, isActive, handleLogout }) {
     return (
         <>
             <Header onOpenBurger={onOpenBurger} isActive={isActive} />
@@ -21,7 +21,7 @@ function Profile({ onOpenBurger, isActive }) {
                     </div>
                     <button className="form__button form__button_profile">Редактировать</button>
                 </form>
-                <Link to="/" className="profile__out">Выйти из аккаунта</Link>
+                <Link to="/" className="profile__out" onClick={handleLogout}>Выйти из аккаунта</Link>
             </section>
         </>
     );

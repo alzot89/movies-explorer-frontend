@@ -21,7 +21,7 @@ function MoviesCard({ movie }) {
         description: movie.description,
         trailer: movie.trailerLink,
         image: imageURL,
-        thumbnail: movie.image.thumbnail
+        thumbnail: BASE_URL + movie.image.formats.thumbnail.url
     }
 
     function saveMovie() {
