@@ -28,6 +28,10 @@ class MainApi {
 
     getUserData() {
         return fetch(`${this._address}/users/me`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             credentials: 'include'
         })
             .then((res) => {
@@ -45,7 +49,11 @@ class MainApi {
             credentials: 'include'
         })
             .then((res) => {
-                return this._checkResponseStatus(res)
+                if (res.status === 200) {
+                    return this._checkResponseStatus(res)
+                } else {
+                    throw res.json()
+                }
             })
     }
 

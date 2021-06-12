@@ -1,12 +1,12 @@
 .footer {
     background-color: #202020;
     max-width: 100%;
-    margin: 0;
     padding: 79px 70px 20px;
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(3, min-content);
+    margin-top: auto;
 }
 
 .footer__note {

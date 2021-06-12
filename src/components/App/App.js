@@ -8,7 +8,9 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import SideMenu from '../SideMenu/SideMenu';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi';
-import * as auth from '../../utils/auth'
+import * as auth from '../../utils/auth';
+import mainApi from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -22,12 +24,27 @@ function App() {
   const [toggle, setToggle] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [currentUser, setCurrentUser] = useState({
+    name: '',
+    email: '',
+  });
   const history = useHistory();
+
+  useEffect(() => {
+    mainApi.getUserData()
+      .then((data) => {
+        setCurrentUser({ name: data.name, email: data.email })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
   function handleRegister(credential) {
     auth.register(credential)
       .then((res) => {
         if (res) {
+          setErrorMessage("")
           history.push('/signin')
         }
       })
@@ -43,10 +60,11 @@ function App() {
     auth.authorize(credential)
       .then(() => {
         setLoggedIn(true);
+        setErrorMessage("")
       })
       .then(() => { history.push('/movies') })
       .catch((err) => {
-        err.then((preview) => { setErrorMessage(preview.message) })
+        err.then((res) => { setErrorMessage(res.message) })
       });
   }
 
@@ -65,6 +83,19 @@ function App() {
       .then(() => { history.push('/movies') })
       .catch((err) => { console.log(err) })
   }, [history])
+
+  function handleUpdateProfile(credential) {
+    mainApi.changeUserData(credential)
+      .then((data) => {
+        if (data) {
+          setCurrentUser({ name: data.name, email: data.email })
+          setErrorMessage("")
+        }
+      })
+      .catch((err) => {
+        err.then((preview) => { setErrorMessage(preview.message) })
+      });
+  }
 
   async function handleRequest() {
     setIsLoading(true);
@@ -112,34 +143,35 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route path="/profile">
-          <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} handleLogout={handleLogout} />
-          <SideMenu isActive={isActive} />
-        </Route>
-        <Route path="/movies">
-          <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} handleChange={handleInputChange} handleSubmit={handleSearchFormSubmit} toggle={toggle} handleCheckbox={handleCheckbox} />
-          <SideMenu isActive={isActive} />
-        </Route>
-        <Route path="/saved-movies">
-          <SavedMovies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} />
-          <SideMenu isActive={isActive} />
-        </Route>
-        <Route path="/signup">
-          <Register onRegister={handleRegister} errorMessage={errorMessage} />
-        </Route >
-        <Route path="/signin">
-          <Login onLogin={handleLogin} errorMessage={errorMessage} />
-        </Route >
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        <Switch>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <Route path="/profile">
+            <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} handleLogout={handleLogout} onUpdateProfile={handleUpdateProfile} errorMessage={errorMessage} />
+            <SideMenu isActive={isActive} />
+          </Route>
+          <Route path="/movies">
+            <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} handleChange={handleInputChange} handleSubmit={handleSearchFormSubmit} toggle={toggle} handleCheckbox={handleCheckbox} />
+          </Route>
+          <Route path="/saved-movies">
+            <SavedMovies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} />
+            <SideMenu isActive={isActive} />
+          </Route>
+          <Route path="/signup">
+            <Register onRegister={handleRegister} errorMessage={errorMessage} />
+          </Route >
+          <Route path="/signin">
+            <Login onLogin={handleLogin} errorMessage={errorMessage} />
+          </Route >
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
+    </CurrentUserContext.Provider >
   );
 }
 

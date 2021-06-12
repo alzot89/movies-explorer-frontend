@@ -5,8 +5,16 @@ import { useFormWithValidation } from '../../hooks/useForm';
 import { useEffect } from 'react';
 
 function Register({ onRegister, errorMessage }) {
-    const { credential, setValidity, validity, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+    const { credential, setValidity, setCredential, setIsValid, setErrors, validity, handleChange, errors, isValid } = useFormWithValidation();
     const initialValidity = { name: true, email: true, password: true }
+    const initialInputData = { name: "", email: "", password: "" };
+
+    function resetForm() {
+        setCredential(initialInputData);
+        setErrors(initialInputData);
+        setIsValid(false);
+        setValidity(initialValidity);
+    }
 
     function handleSubmit(e) {
         e.preventDefault();

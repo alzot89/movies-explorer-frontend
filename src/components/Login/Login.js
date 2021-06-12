@@ -5,18 +5,25 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
 function Login({ onLogin, errorMessage }) {
-    const { credential, setValidity, validity, handleChange, errors, isValid, resetForm } = useFormWithValidation();
-    const initialValidity = { email: true, password: true }
+    const { credential, setValidity, setCredential, setIsValid, setErrors, validity, handleChange, errors, isValid } = useFormWithValidation();
+    const initialValidity = { email: true, password: true };
+    const initialInputData = { email: "", password: "" };
+
+    function resetForm() {
+        setCredential(initialInputData);
+        setErrors(initialInputData);
+        setIsValid(false);
+        setValidity(initialValidity);
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
         onLogin(credential);
         resetForm();
-        setValidity(initialValidity)
     }
 
     useEffect(() => {
-        setValidity(initialValidity)
+        setValidity(initialValidity);
     }, [])
 
     return (
