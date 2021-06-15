@@ -4,7 +4,7 @@ import { useFormWithValidation } from '../../hooks/useForm';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 
-function Login({ onLogin, errorMessage }) {
+function Login({ onLogin, errorMessage, setErrorMessage }) {
     const { credential, setValidity, setCredential, setIsValid, setErrors, validity, handleChange, errors, isValid } = useFormWithValidation();
     const initialValidity = { email: true, password: true };
     const initialInputData = { email: "", password: "" };
@@ -24,6 +24,7 @@ function Login({ onLogin, errorMessage }) {
 
     useEffect(() => {
         setValidity(initialValidity);
+        setErrorMessage("")
     }, [])
 
     return (

@@ -44,7 +44,6 @@ function App() {
     auth.register(credential)
       .then((res) => {
         if (res) {
-          setErrorMessage("")
           history.push('/signin')
         }
       })
@@ -60,7 +59,6 @@ function App() {
     auth.authorize(credential)
       .then(() => {
         setLoggedIn(true);
-        setErrorMessage("")
       })
       .then(() => { history.push('/movies') })
       .catch((err) => {
@@ -85,11 +83,11 @@ function App() {
   }, [history])
 
   function handleUpdateProfile(credential) {
+    setErrorMessage("")
     mainApi.changeUserData(credential)
       .then((data) => {
         if (data) {
           setCurrentUser({ name: data.name, email: data.email })
-          setErrorMessage("")
         }
       })
       .catch((err) => {
@@ -150,7 +148,7 @@ function App() {
             <Main />
           </Route>
           <Route path="/profile">
-            <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} handleLogout={handleLogout} onUpdateProfile={handleUpdateProfile} errorMessage={errorMessage} />
+            <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} handleLogout={handleLogout} onUpdateProfile={handleUpdateProfile} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
             <SideMenu isActive={isActive} />
           </Route>
           <Route path="/movies">
@@ -161,10 +159,10 @@ function App() {
             <SideMenu isActive={isActive} />
           </Route>
           <Route path="/signup">
-            <Register onRegister={handleRegister} errorMessage={errorMessage} />
+            <Register onRegister={handleRegister} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
           </Route >
           <Route path="/signin">
-            <Login onLogin={handleLogin} errorMessage={errorMessage} />
+            <Login onLogin={handleLogin} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
           </Route >
           <Route path="*">
             <NotFound />

@@ -5,7 +5,7 @@ import { useFormWithValidation } from '../../hooks/useForm';
 import { useEffect, useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ onOpenBurger, isActive, handleLogout, onUpdateProfile, errorMessage }) {
+function Profile({ onOpenBurger, isActive, handleLogout, onUpdateProfile, errorMessage, setErrorMessage }) {
     const { credential, setValidity, setCredential, setIsValid, setErrors, validity, handleChange, errors, isValid } = useFormWithValidation();
     const initialValidity = { name: true, email: true };
     const initialInputData = { name: "", email: "" };
@@ -26,6 +26,7 @@ function Profile({ onOpenBurger, isActive, handleLogout, onUpdateProfile, errorM
     }
 
     useEffect(() => {
+        setErrorMessage("")
         setValidity(initialValidity);
         setCredential(currentUser)
     }, [])
