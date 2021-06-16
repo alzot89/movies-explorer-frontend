@@ -7,21 +7,15 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import SideMenu from '../SideMenu/SideMenu';
 import NotFound from '../NotFound/NotFound';
-import moviesApi from '../../utils/MoviesApi';
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
+
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState('');
   const [isActive, setIsActive] = useState(false);
-  const [movies, setMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [toggle, setToggle] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({
@@ -95,47 +89,6 @@ function App() {
       });
   }
 
-  async function handleRequest() {
-    setIsLoading(true);
-    try {
-      const res = await moviesApi.getMovies();
-      setIsLoading(false);
-      return res
-    } catch (err) {
-      console.log(err)
-      setIsLoading(false)
-    }
-  }
-
-  function handleSearchFormSubmit(e) {
-    const form = e.target;
-    e.preventDefault();
-    handleRequest()
-      .then((res) => {
-        const filteredMovies = filterByKeyWord(res, searchQuery)
-        if (searchQuery !== '') {
-          setMovies(filteredMovies)
-          setFilteredMovies(filteredMovies)
-        }
-      })
-    form.reset();
-  }
-
-  function handleCheckbox(e) {
-    setToggle(!toggle);
-    const checked = e.target.checked
-    if (!checked) {
-      setMovies(filteredMovies)
-    } else {
-      const shortMovies = filterByDuration(filteredMovies);
-      setMovies(shortMovies)
-    }
-  }
-
-  function handleInputChange(e) {
-    setSearchQuery(e.target.value)
-  }
-
   function hadleOpenBurger() {
     setIsActive(!isActive);
   }
@@ -152,10 +105,10 @@ function App() {
             <SideMenu isActive={isActive} />
           </Route>
           <Route path="/movies">
-            <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} handleChange={handleInputChange} handleSubmit={handleSearchFormSubmit} toggle={toggle} handleCheckbox={handleCheckbox} />
+            <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} />
           </Route>
           <Route path="/saved-movies">
-            <SavedMovies isActive={isActive} onOpenBurger={hadleOpenBurger} movies={movies} isLoading={isLoading} />
+            <SavedMovies isActive={isActive} onOpenBurger={hadleOpenBurger} />
             <SideMenu isActive={isActive} />
           </Route>
           <Route path="/signup">

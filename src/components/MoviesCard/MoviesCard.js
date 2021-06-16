@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { Route } from 'react-router';
 import './movies-card.css';
-import mainApi from '../../utils/MainApi'
 
+function MoviesCard({ movie, handleDelete, handleSave }) {
 
-
-function MoviesCard({ movie }) {
     const [saved, setSaved] = useState(false);
+    const [savedMovie, setSavedMovie] = useState({})
     const BASE_URL = 'https://api.nomoreparties.co';
     const imageURL = movie.image ? BASE_URL + movie.image.url : 'нет картинки';
     const duration = `${Math.floor(movie.duration / 60)}ч${movie.duration % 60}м`;
@@ -21,31 +20,36 @@ function MoviesCard({ movie }) {
         description: movie.description,
         trailer: movie.trailerLink,
         image: imageURL,
-        thumbnail: BASE_URL + movie.image.formats.thumbnail.url
+        thumbnail: movie.image.formats ? BASE_URL + movie.image.formats.thumbnail.url : 'нет thumbnail'
     }
 
     function saveMovie() {
-        setSaved(!saved)
-        if (!saved) {
-            mainApi.saveMovie(movieData)
-        } else {
-            mainApi.deleteMovie(movie.id)
-        }
+        setSaved(!saved);
+        handleSave(saved, movieData, savedMovie, setSavedMovie)
+    }
+
+    function deleteMovie() {
+        handleDelete(movie)
     }
 
     return (
         <li className="movie">
-            <img src={imageURL} alt={movie.nameRU} className="movie__img"></img>
-            <div className="movie__info">
-                <h4 className="movie__title">{movie.nameRU}</h4>
-                <Route path="/movies">
+            <Route path="/movies">
+                <img src={imageURL} alt={movie.nameRU} className="movie__img"></img>
+                <div className="movie__info">
+                    <h4 className="movie__title">{movie.nameRU}</h4>
                     <button className={`movie__button ${saved && 'movie__button_active'}`} onClick={saveMovie}></button>
-                </Route>
-                <Route path="/saved-movies">
-                    <button className="movie__button movie__button_delete"></button>
-                </Route>
-                <p className="movie__duration">{duration}</p>
-            </div>
+                    <p className="movie__duration">{duration}</p>
+                </div>
+            </Route>
+            <Route path="/saved-movies">
+                <img src={movie.image} alt={movie.nameRU} className="movie__img"></img>
+                <div className="movie__info">
+                    <h4 className="movie__title">{movie.nameRU}</h4>
+                    <button className="movie__button movie__button_delete" onClick={deleteMovie} ></button>
+                    <p className="movie__duration">{duration}</p>
+                </div>
+            </Route>
         </li>
     );
 }
