@@ -10,7 +10,7 @@ import useWindowDimensions from '../../utils/MediaQuery';
 import moviesApi from '../../utils/MoviesApi';
 import { useState } from 'react';
 import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
-import mainApi from '../../utils/MainApi'
+import mainApi from '../../utils/MainApi';
 
 function Movies({ isActive, onOpenBurger }) {
     const [movies, setMovies] = useState([]);
@@ -66,34 +66,13 @@ function Movies({ isActive, onOpenBurger }) {
         }
     }
 
-    function handleSaveMovie(saved, movieData, savedMovie, setSavedMovie) {
-        if (!saved) {
-            mainApi.saveMovie(movieData)
-                .then((res) => {
-                    console.log(res);
-                    setSavedMovie(res)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        } else {
-            mainApi.deleteMovie(savedMovie._id)
-                .then((res) => {
-                    console.log(res)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        }
-    }
-
     return (
         <section className="movies">
             <Header isActive={isActive} onOpenBurger={onOpenBurger} />
             <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} toggle={toggle} handleCheckbox={handleCheckbox} />
             {isLoading
                 ? <Preloader />
-                : <MoviesCardList movies={movies} index={index} onSaveMovie={handleSaveMovie} />}
+                : <MoviesCardList movies={movies} index={index} />}
             <Footer />
             <SideMenu isActive={isActive} />
         </section>

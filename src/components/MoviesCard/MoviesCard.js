@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Route } from 'react-router';
+import mainApi from '../../utils/MainApi';
 import './movies-card.css';
 
-function MoviesCard({ movie, handleDelete, handleSave }) {
+function MoviesCard({ movie, handleDelete }) {
 
-    const [saved, setSaved] = useState(false);
+    const [saved, setSaved] = useState(false)
     const [savedMovie, setSavedMovie] = useState({})
     const BASE_URL = 'https://api.nomoreparties.co';
     const imageURL = movie.image ? BASE_URL + movie.image.url : 'нет картинки';
@@ -24,8 +25,28 @@ function MoviesCard({ movie, handleDelete, handleSave }) {
     }
 
     function saveMovie() {
-        setSaved(!saved);
-        handleSave(saved, movieData, savedMovie, setSavedMovie)
+        setSaved((saved) => {
+            saved = !saved;
+            if (saved) {
+                mainApi.saveMovie(movieData)
+                    .then((res) => {
+                        setSavedMovie(res)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            } else {
+                mainApi.deleteMovie(savedMovie._id)
+                    .then((res) => {
+                        console.log(res)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+            return saved
+        });
+
     }
 
     function deleteMovie() {
