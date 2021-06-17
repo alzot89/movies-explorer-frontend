@@ -5,6 +5,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import mainApi from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
+import SideMenu from '../SideMenu/SideMenu';
 import { useEffect, useState } from 'react';
 import useWindowDimensions from '../../utils/MediaQuery';
 import { defineMoviesAmount } from '../../utils/defineMoviesAmount';
@@ -91,6 +92,7 @@ function SavedMovies({ isActive, onOpenBurger }) {
                 ? <Preloader />
                 : <MoviesCardList movies={movies} index={index} onDeleteMovie={handleDeleteMovie} />}
             <Footer />
+            <SideMenu isActive={isActive} />
         </section>
     );
 }

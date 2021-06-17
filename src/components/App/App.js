@@ -5,10 +5,10 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import SideMenu from '../SideMenu/SideMenu';
 import NotFound from '../NotFound/NotFound';
 import * as auth from '../../utils/auth';
 import mainApi from '../../utils/MainApi';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import { Route, Switch, useHistory } from 'react-router-dom';
@@ -23,6 +23,17 @@ function App() {
     email: '',
   });
   const history = useHistory();
+
+  useEffect(() => {
+    auth.checkToken()
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+        }
+      })
+      .then(() => { history.push("/movies") })
+      .catch((err) => { console.log(err) })
+  }, [history])
 
   useEffect(() => {
     mainApi.getUserData()
@@ -65,17 +76,6 @@ function App() {
     setLoggedIn(false);
   }
 
-  useEffect(() => {
-    auth.checkToken()
-      .then((res) => {
-        if (res) {
-          setLoggedIn(true);
-        }
-      })
-      .then(() => { history.push('/movies') })
-      .catch((err) => { console.log(err) })
-  }, [history])
-
   function handleUpdateProfile(credential) {
     setErrorMessage("")
     mainApi.changeUserData(credential)
@@ -100,23 +100,30 @@ function App() {
           <Route exact path="/">
             <Main />
           </Route>
-          <Route path="/profile">
-            <Profile isActive={isActive} onOpenBurger={hadleOpenBurger} handleLogout={handleLogout} onUpdateProfile={handleUpdateProfile} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
-            <SideMenu isActive={isActive} />
-          </Route>
-          <Route path="/movies">
-            <Movies isActive={isActive} onOpenBurger={hadleOpenBurger} />
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMovies isActive={isActive} onOpenBurger={hadleOpenBurger} />
-            <SideMenu isActive={isActive} />
-          </Route>
           <Route path="/signup">
             <Register onRegister={handleRegister} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
           </Route >
           <Route path="/signin">
             <Login onLogin={handleLogin} errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
           </Route >
+          <ProtectedRoute
+            path="/profile"
+            loggedIn={loggedIn}
+            component={Profile}
+            isActive={isActive} onOpenBurger={hadleOpenBurger} handleLogout={handleLogout} onUpdateProfile={handleUpdateProfile} errorMessage={errorMessage} setErrorMessage={setErrorMessage}
+          />
+          <ProtectedRoute
+            path="/movies"
+            loggedIn={loggedIn}
+            component={Movies}
+            isActive={isActive} onOpenBurger={hadleOpenBurger}
+          />
+          <ProtectedRoute
+            path="/saved-movies"
+            loggedIn={loggedIn}
+            component={SavedMovies}
+            isActive={isActive} onOpenBurger={hadleOpenBurger}
+          />
           <Route path="*">
             <NotFound />
           </Route>

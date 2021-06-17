@@ -1,5 +1,6 @@
 import './profile.css';
-import Header from '../Header/Header'
+import Header from '../Header/Header';
+import SideMenu from '../SideMenu/SideMenu';
 import { Link } from 'react-router-dom';
 import { useFormWithValidation } from '../../hooks/useForm';
 import { useEffect, useContext } from 'react';
@@ -52,6 +53,7 @@ function Profile({ onOpenBurger, isActive, handleLogout, onUpdateProfile, errorM
                 </form>
                 <Link to="/" className="profile__out" onClick={handleLogout}>Выйти из аккаунта</Link>
             </section>
+            <SideMenu isActive={isActive} />
         </>
     );
 }
