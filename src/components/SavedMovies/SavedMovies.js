@@ -14,6 +14,9 @@ import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
 function SavedMovies({ isActive, onOpenBurger }) {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState("");
+    const [isFailed, setIsFailed] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(false);
+    const [validity, setValidity] = useState(true)
     const [allMovies, setAllMovies] = useState([]);
     const [submited, setSubmited] = useState(false);
     const [filteredMovies, setFilteredMovies] = useState([]);
@@ -26,16 +29,27 @@ function SavedMovies({ isActive, onOpenBurger }) {
     function handleInputChange(e) {
         setSearchQuery(e.target.value);
         setError("Нужно ввести ключевое слово");
+        setValidity(e.target.validity.valid)
+    }
+
+    function checkMoviesLength(movies) {
+        if (movies.length === 0) {
+            setIsEmpty(true)
+        } else {
+            setIsEmpty(false)
+        }
     }
 
     useEffect(() => {
         setIsLoading(true);
         mainApi.getSavedMovies()
             .then((res) => {
+                setIsFailed(false)
                 setMovies(res)
                 setAllMovies(res)
             })
             .catch((err) => {
+                setIsFailed(true);
                 console.log(err)
             })
             .finally(() => {
@@ -47,11 +61,16 @@ function SavedMovies({ isActive, onOpenBurger }) {
         const form = e.target;
         e.preventDefault();
         const filteredMovies = filterByKeyWord(movies, searchQuery);
-        setMovies(filteredMovies);
+        setMovies((movies) => {
+            movies = filteredMovies;
+            checkMoviesLength(movies);
+            return movies
+        })
         setFilteredMovies(filteredMovies);
         form.reset();
         setSubmited(true);
         setError("");
+        setValidity(true)
     }
 
     function handleCheckbox(e) {
@@ -69,7 +88,11 @@ function SavedMovies({ isActive, onOpenBurger }) {
                 setMovies(filteredMovies)
             } else {
                 const shortMovies = filterByDuration(filteredMovies)
-                setMovies(shortMovies)
+                setMovies((movies) => {
+                    movies = shortMovies;
+                    checkMoviesLength(movies);
+                    return movies
+                })
             }
         }
     }
@@ -87,13 +110,16 @@ function SavedMovies({ isActive, onOpenBurger }) {
             })
     }
 
+    const errorMessage = "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+
+
     return (
         <section className="movies">
             <Header isActive={isActive} onOpenBurger={onOpenBurger} />
-            <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} toggle={toggle} error={error} handleCheckbox={handleCheckbox} />
+            <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} validity={validity} toggle={toggle} error={error} handleCheckbox={handleCheckbox} />
             {isLoading
                 ? <Preloader />
-                : <MoviesCardList movies={movies} index={index} onDeleteMovie={handleDeleteMovie} />}
+                : (isFailed ? <p className="movies__error" >{errorMessage}</p> : <MoviesCardList movies={movies} isEmpty={isEmpty} index={index} onDeleteMovie={handleDeleteMovie} />)}
             <Footer />
             <SideMenu isActive={isActive} />
         </section>
