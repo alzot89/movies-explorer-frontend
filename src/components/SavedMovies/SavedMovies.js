@@ -13,6 +13,7 @@ import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
 
 function SavedMovies({ isActive, onOpenBurger }) {
     const [movies, setMovies] = useState([]);
+    const [error, setError] = useState("");
     const [allMovies, setAllMovies] = useState([]);
     const [submited, setSubmited] = useState(false);
     const [filteredMovies, setFilteredMovies] = useState([]);
@@ -23,7 +24,9 @@ function SavedMovies({ isActive, onOpenBurger }) {
     const index = defineMoviesAmount(width)
 
     function handleInputChange(e) {
-        setSearchQuery(e.target.value)
+        setSearchQuery(e.target.value);
+        e.target.setCustomValidity("Нужно ввести ключевое слово")
+        setError("Нужно ввести ключевое слово");
     }
 
     useEffect(() => {
@@ -49,6 +52,7 @@ function SavedMovies({ isActive, onOpenBurger }) {
         setFilteredMovies(filteredMovies);
         form.reset();
         setSubmited(true);
+        setError("");
     }
 
     function handleCheckbox(e) {
@@ -87,7 +91,7 @@ function SavedMovies({ isActive, onOpenBurger }) {
     return (
         <section className="movies">
             <Header isActive={isActive} onOpenBurger={onOpenBurger} />
-            <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} toggle={toggle} handleCheckbox={handleCheckbox} />
+            <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} toggle={toggle} error={error} handleCheckbox={handleCheckbox} />
             {isLoading
                 ? <Preloader />
                 : <MoviesCardList movies={movies} index={index} onDeleteMovie={handleDeleteMovie} />}

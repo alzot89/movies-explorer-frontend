@@ -10,10 +10,10 @@ import useWindowDimensions from '../../utils/MediaQuery';
 import moviesApi from '../../utils/MoviesApi';
 import { useState } from 'react';
 import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
-import mainApi from '../../utils/MainApi';
 
 function Movies({ isActive, onOpenBurger }) {
     const [movies, setMovies] = useState([]);
+    const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false)
     const [filteredMovies, setFilteredMoviees] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +22,9 @@ function Movies({ isActive, onOpenBurger }) {
     const index = defineMoviesAmount(width)
 
     function handleInputChange(e) {
-        setSearchQuery(e.target.value)
+        setSearchQuery(e.target.value);
+        e.target.setCustomValidity("Нужно ввести ключевое слово")
+        setError("Нужно ввести ключевое слово");
     }
 
     async function handleRequest() {
@@ -53,6 +55,7 @@ function Movies({ isActive, onOpenBurger }) {
                 setIsLoading(false)
             })
         form.reset();
+        setError("");
     }
 
     function handleCheckbox(e) {
@@ -69,7 +72,7 @@ function Movies({ isActive, onOpenBurger }) {
     return (
         <section className="movies">
             <Header isActive={isActive} onOpenBurger={onOpenBurger} />
-            <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} toggle={toggle} handleCheckbox={handleCheckbox} />
+            <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} toggle={toggle} error={error} handleCheckbox={handleCheckbox} />
             {isLoading
                 ? <Preloader />
                 : <MoviesCardList movies={movies} index={index} />}
