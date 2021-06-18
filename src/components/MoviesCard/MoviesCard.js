@@ -53,10 +53,15 @@ function MoviesCard({ movie, handleDelete }) {
         handleDelete(movie)
     }
 
+
+    function openTrailer() {
+        window.open(movie.trailerLink || movie.trailer);
+    }
+
     return (
         <li className="movie">
             <Route path="/movies">
-                <img src={imageURL} alt={movie.nameRU} className="movie__img"></img>
+                <img src={imageURL} alt={movie.nameRU} className="movie__img" onClick={openTrailer} ></img>
                 <div className="movie__info">
                     <h4 className="movie__title">{movie.nameRU}</h4>
                     <button className={`movie__button ${saved && 'movie__button_active'}`} onClick={saveMovie}></button>
@@ -64,7 +69,7 @@ function MoviesCard({ movie, handleDelete }) {
                 </div>
             </Route>
             <Route path="/saved-movies">
-                <img src={movie.image} alt={movie.nameRU} className="movie__img"></img>
+                <img src={movie.image} alt={movie.nameRU} className="movie__img" onClick={openTrailer}></img>
                 <div className="movie__info">
                     <h4 className="movie__title">{movie.nameRU}</h4>
                     <button className="movie__button movie__button_delete" onClick={deleteMovie} ></button>
