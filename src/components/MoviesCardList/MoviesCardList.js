@@ -14,7 +14,7 @@ function MoviesCardList({ movies, index, onDeleteMovie, onSaveMovie }) {
     return (
         <div className="movies__container">
             <ul className="movies__list">
-                {movies.slice(0, moviesAmount).map((movie) => { return (<MoviesCard movie={movie} handleSave={onSaveMovie} handleDelete={onDeleteMovie} key={movie.id ? movie.id : movie._id} />) })}
+                {movies.slice(0, moviesAmount).map((movie) => { return (<MoviesCard movie={movie} handleSave={onSaveMovie} handleDelete={onDeleteMovie} key={movie.id || movie._id} />) })}
             </ul>
             <Route path="/movies">
                 <button className={`movies__button ${moviesAmount >= movies.length && 'movies__button_hidden'}`} onClick={handleClick}>Еще</button>

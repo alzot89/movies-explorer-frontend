@@ -23,7 +23,6 @@ function Movies({ isActive, onOpenBurger }) {
 
     function handleInputChange(e) {
         setSearchQuery(e.target.value);
-        e.target.setCustomValidity("Нужно ввести ключевое слово")
         setError("Нужно ввести ключевое слово");
     }
 
