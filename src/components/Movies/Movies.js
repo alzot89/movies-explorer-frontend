@@ -8,7 +8,7 @@ import SideMenu from '../SideMenu/SideMenu';
 import { defineMoviesAmount } from '../../utils/defineMoviesAmount';
 import useWindowDimensions from '../../utils/MediaQuery';
 import moviesApi from '../../utils/MoviesApi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
 
 function Movies({ isActive, onOpenBurger }) {
@@ -23,6 +23,31 @@ function Movies({ isActive, onOpenBurger }) {
     const [toggle, setToggle] = useState(false);
     const { width } = useWindowDimensions();
     const index = defineMoviesAmount(width);
+
+    useEffect(() => {
+        const searchQuery = localStorage.getItem('searchQuery');
+        const checked = localStorage.getItem('checkBox') === "true";
+        setToggle(checked);
+        if (searchQuery) {
+            setSearchQuery((prevSearchQuery) => {
+                prevSearchQuery = searchQuery
+                handleRequest()
+                    .then((res) => {
+                        const filteredMovies = filterByKeyWord(res, prevSearchQuery)
+                        setFilteredMoviees(filteredMovies)
+                        setMovies((movies) => {
+                            movies = filteredMovies;
+                            if (checked) {
+                                movies = filterByDuration(movies)
+                            }
+                            checkMoviesLength(movies);
+                            return movies
+                        })
+                    })
+                return prevSearchQuery
+            });
+        }
+    }, [])
 
     function handleInputChange(e) {
         setSearchQuery(e.target.value);
@@ -65,9 +90,7 @@ function Movies({ isActive, onOpenBurger }) {
                         checkMoviesLength(movies);
                         return movies
                     })
-                        .catch((err) => {
-                            console.log(err)
-                        })
+                    localStorage.setItem('searchQuery', searchQuery);
                 }
             })
             .catch((err) => {
@@ -90,6 +113,7 @@ function Movies({ isActive, onOpenBurger }) {
                 checkMoviesLength(movies);
                 return movies
             })
+            localStorage.setItem('checkBox', checked);
         }
     }
 
