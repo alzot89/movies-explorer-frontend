@@ -11,7 +11,8 @@ import moviesApi from '../../utils/MoviesApi';
 import { useEffect, useState } from 'react';
 import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
 
-function Movies({ isActive, onOpenBurger }) {
+function Movies() {
+    const [isActive, setIsActive] = useState(false);
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState("");
     const [isFailed, setIsFailed] = useState(false);
@@ -24,10 +25,12 @@ function Movies({ isActive, onOpenBurger }) {
     const { width } = useWindowDimensions();
     const index = defineMoviesAmount(width);
 
+    function handleOpenBurger() {
+        setIsActive(!isActive);
+    }
+
     useEffect(() => {
         const searchQuery = localStorage.getItem('searchQuery');
-        const checked = localStorage.getItem('checkBox') === "true";
-        setToggle(checked);
         if (searchQuery) {
             setSearchQuery((prevSearchQuery) => {
                 prevSearchQuery = searchQuery
@@ -37,9 +40,6 @@ function Movies({ isActive, onOpenBurger }) {
                         setFilteredMoviees(filteredMovies)
                         setMovies((movies) => {
                             movies = filteredMovies;
-                            if (checked) {
-                                movies = filterByDuration(movies)
-                            }
                             checkMoviesLength(movies);
                             return movies
                         })
@@ -113,7 +113,6 @@ function Movies({ isActive, onOpenBurger }) {
                 checkMoviesLength(movies);
                 return movies
             })
-            localStorage.setItem('checkBox', checked);
         }
     }
 
@@ -121,7 +120,7 @@ function Movies({ isActive, onOpenBurger }) {
 
     return (
         <section className="movies">
-            <Header isActive={isActive} onOpenBurger={onOpenBurger} />
+            <Header isActive={isActive} onOpenBurger={handleOpenBurger} />
             <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} validity={validity} toggle={toggle} error={error} handleCheckbox={handleCheckbox} />
             {isLoading
                 ? <Preloader />

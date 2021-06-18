@@ -15,7 +15,6 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [isActive, setIsActive] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({
@@ -89,10 +88,6 @@ function App() {
       });
   }
 
-  function hadleOpenBurger() {
-    setIsActive(!isActive);
-  }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
@@ -110,19 +105,17 @@ function App() {
             path="/profile"
             loggedIn={loggedIn}
             component={Profile}
-            isActive={isActive} onOpenBurger={hadleOpenBurger} handleLogout={handleLogout} onUpdateProfile={handleUpdateProfile} errorMessage={errorMessage} setErrorMessage={setErrorMessage}
+            handleLogout={handleLogout} onUpdateProfile={handleUpdateProfile} errorMessage={errorMessage} setErrorMessage={setErrorMessage}
           />
           <ProtectedRoute
             path="/movies"
             loggedIn={loggedIn}
             component={Movies}
-            isActive={isActive} onOpenBurger={hadleOpenBurger}
           />
           <ProtectedRoute
             path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
-            isActive={isActive} onOpenBurger={hadleOpenBurger}
           />
           <Route path="*">
             <NotFound />

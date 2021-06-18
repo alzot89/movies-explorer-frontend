@@ -5,12 +5,18 @@ import { Link } from 'react-router-dom';
 import { useFormWithValidation } from '../../hooks/useForm';
 import { useEffect, useContext } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useState } from 'react'
 
-function Profile({ onOpenBurger, isActive, handleLogout, onUpdateProfile, errorMessage, setErrorMessage }) {
+function Profile({ handleLogout, onUpdateProfile, errorMessage, setErrorMessage }) {
     const { credential, setValidity, setCredential, setIsValid, setErrors, validity, handleChange, errors, isValid } = useFormWithValidation();
     const initialValidity = { name: true, email: true };
     const initialInputData = { name: "", email: "" };
     const currentUser = useContext(CurrentUserContext);
+    const [isActive, setIsActive] = useState(false);
+
+    function handleOpenBurger() {
+        setIsActive(!isActive);
+    }
 
     function resetForm() {
         setCredential(initialInputData);
@@ -34,7 +40,7 @@ function Profile({ onOpenBurger, isActive, handleLogout, onUpdateProfile, errorM
 
     return (
         <>
-            <Header onOpenBurger={onOpenBurger} isActive={isActive} />
+            <Header onOpenBurger={handleOpenBurger} isActive={isActive} />
             <section className="profile">
                 <h2 className="profile__title">Привет, Александр</h2>
                 <form className="form form_profile" name="profile" onSubmit={handleSubmit} >

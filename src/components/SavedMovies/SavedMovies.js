@@ -11,7 +11,8 @@ import useWindowDimensions from '../../utils/MediaQuery';
 import { defineMoviesAmount } from '../../utils/defineMoviesAmount';
 import { filterByKeyWord, filterByDuration } from '../../utils/FilterMovies';
 
-function SavedMovies({ isActive, onOpenBurger }) {
+function SavedMovies() {
+    const [isActive, setIsActive] = useState(false);
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState("");
     const [isFailed, setIsFailed] = useState(false);
@@ -25,6 +26,10 @@ function SavedMovies({ isActive, onOpenBurger }) {
     const [toggle, setToggle] = useState(false);
     const { width } = useWindowDimensions();
     const index = defineMoviesAmount(width)
+
+    function handleOpenBurger() {
+        setIsActive(!isActive);
+    }
 
     function handleInputChange(e) {
         setSearchQuery(e.target.value);
@@ -115,7 +120,7 @@ function SavedMovies({ isActive, onOpenBurger }) {
 
     return (
         <section className="movies">
-            <Header isActive={isActive} onOpenBurger={onOpenBurger} />
+            <Header isActive={isActive} onOpenBurger={handleOpenBurger} />
             <SearchForm handleChange={handleInputChange} onSubmit={handleSearchFormSubmit} validity={validity} toggle={toggle} error={error} handleCheckbox={handleCheckbox} />
             {isLoading
                 ? <Preloader />
