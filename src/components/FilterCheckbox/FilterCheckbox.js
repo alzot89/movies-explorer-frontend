@@ -1,16 +1,18 @@
-import { useState } from 'react';
 import './checkbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox({ toggle, handleCheckbox }) {
 
-    const [checked, setChecked] = useState(false)
+    function handleChange(e) {
+        handleCheckbox(e)
+    }
 
     return (
-        <div className={`checkbox ${checked && 'checkbox_active'}`} onClick={() => { setChecked(!checked) }} >
-            <label htmlFor="checkbox">
-                <input type="checkbox" name="checkbox" id="checkbox"></input>
-                Короткометражки</label>
-        </div>
+        <label htmlFor="checkbox" className="search__label" >
+            <input className="search__input search__input_type_checkbox" type="checkbox" checked={toggle} name="checkbox" id="checkbox" onChange={handleChange} ></input>
+            <span className={`search__base ${toggle && 'search__base_active'}`}></span>
+            <span className={`search__tumbler ${toggle && 'search__tumbler_active'}`}></span>
+            <span className="search__label-text">Короткометражки</span>
+        </label>
     );
 }
 

@@ -92,5 +92,6 @@
 
   .account-button_navigation {
     display: block;
+    margin-top: auto;
   }
 }
