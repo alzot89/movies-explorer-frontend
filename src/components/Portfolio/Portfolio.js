@@ -17,7 +17,7 @@ function Portfolio() {
                 </a>
                 <div className="portfolio__line"></div>
                 <p className="portfolio__subtitle">Одностраничное приложение</p>
-                <a href=" https://alzot.cards.nomoredomains.monster" className="portfolio__link" target="blank">
+                <a href="https://alzot89.github.io/react-mesto-auth/" className="portfolio__link" target="blank">
                     <img src={Arrow} alt="картинка: ссылка"></img>
                 </a>
             </div>
